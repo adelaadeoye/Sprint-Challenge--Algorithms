@@ -97,7 +97,35 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        while self.can_move_left():
+            self.move_left()
+        
+       
+        """Sort the robot's list with insertion sort"""
+        # go through every item
+        while self.can_move_right():
+            self.move_right()
+            self.swap_item()
+            # insert the item where it belongs
+            while True:
+                self.move_left()
+                # if less than item at this index, continue left
+                if self.compare_item() == -1:
+                    if self.can_move_left():
+                        continue
+                    else:
+                        # swap if index 0
+                        self.swap_item()
+                        break
+                # if not less than item at this index, go right then swap
+                else: 
+                    self.move_right()
+                    self.swap_item()
+                    break
+            # shift other items until back to original position
+            while self.compare_item() != None:
+                self.move_right()
+                self.swap_item()
 
 
 if __name__ == "__main__":
